@@ -1,7 +1,10 @@
 import express from 'express';
 import cors from 'cors'
 import mongoose from 'mongoose'
-import Router from './src/routes/Events.js'
+import EventsRouter from './src/routes/EventsRoutes.js'
+import ManagerRouter from './src/routes/ManagerRoutes.js'
+import PromoterRouter from './src/routes/PromoterRoutes.js'
+
 
 const app = express();
 
@@ -18,4 +21,6 @@ mongoose.connect(DB,{ useNewUrlParser: true,useUnifiedTopology: true })
 .then((app.listen(PORT, () => {console.log(`Server is running on port ${PORT}`)})))
 .catch(err => console.log(err))
 
-app.use('/',Router)
+app.use('/events',EventsRouter)
+app.use('/managers',ManagerRouter)
+app.use('/promoters',PromoterRouter)
