@@ -1,8 +1,10 @@
-
+import Header from "./Screens/Header";
+import Body from "./Screens/Body";
 function App() {
   return (
     <div className="App">
-    <h>hello</h>
+    <Header />
+    <Body />
     </div>
   );
 }
