@@ -10,7 +10,9 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         textAlign: 'center',
         color: theme.palette.text.secondary,
-        backgroundColor: '#e8e9eb',
+        backgroundColor: '#e4e8ef',
+        height:'100%',
+        width:'100%',
         // boxShadow:,
         boxShadow: '0px 15px 10px -15px #111'
     },
