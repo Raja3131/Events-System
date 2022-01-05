@@ -7,9 +7,11 @@ export default function Nav() {
     let navigate=useNavigate()
 
     const nav = [{ title: 'Event Handling', path: '/' ,padding:'3% 28%'},
-                 { title: 'Client Details', path: 'dummy' ,padding:'3% 31%'},
-                 { title: 'Promoter Details', path: 'modify' ,padding:'3% 26%'},
-                 { title: 'Registeration Details', path: 'client',padding:'3% 21%' }
+                 { title: 'Client Details', path: 'client' ,padding:'3% 31%'},
+                 { title: 'Promoter Details', path: 'promoter' ,padding:'3% 26%'},
+                 { title: 'Registration Details', path: 'client',padding:'3% 21%' },
+                    { title: 'Manager Details', path: 'manager',padding:'3% 24%' },
+
                 ];
 
     const route=(item)=>{

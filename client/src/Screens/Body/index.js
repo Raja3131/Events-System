@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import {Routes,Route } from "react-router-dom";
 import Event from "./Main/Event/Event";
+import EventManager from "./Main/Event/ManagerForm/ManagerForm";
 
 export default function Body(){
     return(
@@ -12,6 +13,8 @@ export default function Body(){
             <div style={{height:'100%',width:'80%'}}>
                 <Routes>
                     <Route exact path='/' element={<Event/>}/>
+                    <Route path='/manager' element={<EventManager/>}/>
+                    
                 </Routes>
             </div>
         </div>
