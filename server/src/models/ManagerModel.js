@@ -1,12 +1,31 @@
 import mongoose from 'mongoose';
 
 const mangerSchema = new mongoose.Schema({
-    name: {
+    firstName: {
 
         type: String,
         required: true,
         unique: true
         
+    },
+    lastName: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    occupation: {
+        type: String,
+        required: true
+    
+    },
+    address1: {
+        type: String,
+        required: true
+
+    },
+    address2: {
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -16,7 +35,17 @@ const mangerSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    
+
+    },
+    phone: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    website: {
+        type: String,
+        required: true
+        
     }
 })
 

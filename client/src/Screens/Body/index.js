@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import {Routes,Route } from "react-router-dom";
 import Event from "./Main/Event/Event";
-import EventManager from "./Main/Event/ManagerForm/ManagerForm";
+import EventManager from "./Main/Manager/ManagerForm/ManagerForm";
 
 export default function Body(){
     return(

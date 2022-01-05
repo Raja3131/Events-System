@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import {Formik,Form,Field}from 'formik'
 import validationSchema from "./ManagerValidation";
 import { TextField } from "formik-material-ui"
+import ManagerList from "../ManagerList/ManagerList";
+import { useDispatch, useSelector } from "react-redux";
+import { getManager, putManager, postManager, deleteManager } from "../../../../../Redux/Action/ManagerAction/ManagerAction";
+import {useEffect} from 'react'
+
 
 import {
     Grid,
@@ -22,6 +27,8 @@ import {
   ]
 
 export default function Event(){
+
+
  const [date,setDate]=useState(null)
  const [initialValues, setInitialValues] = useState({  firstName: "",
  lastName: "",
@@ -34,9 +41,18 @@ export default function Event(){
  website: "",
  validateOnMount: true,
 })
+const manager=useSelector(state=>state.manager)
+const dispatch=useDispatch()
+useEffect(()=>{
+    dispatch(getManager())
+},[dispatch])
+
     const handleSubmit=(values,formikHelpers)=>{
         formikHelpers.resetForm();
+        dispatch(postManager(values))
+        console.log(values)
     }
+
     return(
         <>
             <Formik
@@ -196,6 +212,7 @@ export default function Event(){
                             )}
                    }
             </Formik>
+            <ManagerList/>
         </>
     )
 }
