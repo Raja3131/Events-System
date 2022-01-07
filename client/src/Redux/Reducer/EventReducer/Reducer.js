@@ -3,17 +3,13 @@ let initial = { data: [] }
 const fetch = (state = initial, action) => {
     switch (action.type) {
         case 'GET':
-            return state;
-        case 'PUT':
-            const array = [...state.data];
-            for (let i = 0; i < array.length; i++) {
-                if (array[i]._id === action.id) {
-                    array.splice(i, 1, action.data)
-                    return { ...state, data: array }
-                }
-            }
-
         case 'POST':
+        case 'PUT':
+        case 'DELETE':
+            return state;
+        case 'GETOPERATION':
+            return { ...state, data: action.data };
+        case 'POSTOPERATION':
             let newlist = [...state.data];
             newlist.push(action.data)
             let newState = {
@@ -21,7 +17,15 @@ const fetch = (state = initial, action) => {
                 data: newlist
             }
             return newState;
-        case 'DELETE':
+        case 'PUTOPERATION':
+            const array = [...state.data];
+            for (let i = 0; i < array.length; i++) {
+                if (array[i]._id === action.id) {
+                    array.splice(i, 1, action.data)
+                    return { ...state, data: array }
+                }
+            }
+        case 'DELETEOPERATION':
             const deletearray = [...state.data];
             for (let i = 0; i < deletearray.length; i++) {
                 if (deletearray[i]._id === action.id) {
@@ -29,12 +33,6 @@ const fetch = (state = initial, action) => {
                     return { ...state, data: deletearray }
                 }
             }
-        case 'GETOPERATION':
-            return { ...state, data: action.data };
-        case 'PUTOPERATION':
-        case 'POSTOPERATION':
-        case 'DELETEOPERATION':
-            return state;
         default:
             return state;
     }

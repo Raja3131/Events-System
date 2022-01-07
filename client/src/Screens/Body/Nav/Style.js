@@ -20,7 +20,6 @@ export const blue = {
 
 export const Tab = styled(TabUnstyled)`
               font-family: IBM Plex Sans, sans-serif;
-              // color: white;
               cursor: pointer;
               font-size: 0.875rem;
               font-weight: bold;
@@ -49,7 +48,6 @@ export const Tab = styled(TabUnstyled)`
 export const TabsList = styled(TabsListUnstyled)`
               min-width: 20%;
               background-color: ${blue[500]};
-              // color:'black';
               margin-bottom: 16px;
               display: flex;
               flex-direction:column;

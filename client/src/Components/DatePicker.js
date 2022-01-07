@@ -4,16 +4,26 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import TextField from '@mui/material/TextField';
 
-const Date=({value,onchange,setDate,label})=>
-               <LocalizationProvider dateAdapter={AdapterDateFns}>
+const Date=({value,setDate,label,min,max})=>{
+    
+            const formats = {
+                normalDate: "dd/MM/yyyy",
+                keyboardDate: "dd/MM/yyyy",
+            };
+            
+    return( <LocalizationProvider dateAdapter={AdapterDateFns} dateFormats={formats}>
                                         <DatePicker
-                                            openTo="year"
-                                            views={['year', 'month', 'day']}
+                                            style={{height:'10px'}}
+                                            minDate={min}
+                                            maxDate={max}
+                                            label="Responsive"
+                                            // openTo="year"
+                                            // views={["year", "month", "date"]}                                            
                                             label={label}
                                             value={value}
                                             onChange={(newValue) => setDate(newValue)}
-                                            // onChange={onchange}
-                                            renderInput={(params) => <TextField {...params} />}
+                                            renderInput={(params) => <TextField  {...params} size='small' />}
                                         />
-                </LocalizationProvider>
+              </LocalizationProvider>)
+}
 export default Date

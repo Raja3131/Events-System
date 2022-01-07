@@ -1,4 +1,5 @@
 import {call,put,takeLatest,fork} from 'redux-saga/effects'
+import React from 'react'
 import { GetRequest,PutRequest,PostRequest,DeleteRequest} from '../../Request/EventRequest/Get'
 
 function* GetRequests(){
@@ -36,6 +37,7 @@ function* PostRequests({data}){
 
 function* DeleteRequests({id}){
     try{
+        console.log(id)
         let Res=yield call(DeleteRequest,id)
         if(Res.status===200){
             yield put({type:'DELETEOPERATION',id:Res.data})
@@ -60,6 +62,5 @@ function* deleteWatcherSaga(){
     yield takeLatest('DELETE',DeleteRequests)
 }
   
-  export default function watcherUserSaga(){
-      const watcherUserSaga=[fork(getWatcherSaga),fork(putWatcherSaga),fork(postWatcherSaga),fork(deleteWatcherSaga)]
-  }
+   
+export const watcherUserSaga=[fork(getWatcherSaga),fork(putWatcherSaga),fork(postWatcherSaga),fork(deleteWatcherSaga)]

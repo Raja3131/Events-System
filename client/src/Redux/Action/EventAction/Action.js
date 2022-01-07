@@ -4,10 +4,10 @@ export const getData = () => {
   }
 };
 
-export const putData = (id,data) => {
+export const putData = (data) => {
   return {
     type: "PUT",
-    id,
+    id:data._id,
     data
   }
 };
@@ -18,8 +18,9 @@ return{
 }
 }
 export const deleteData=(id)=>{
+  console.log(id)
 return{
   type:"DELETE",
-  id
+  id:id._id
 }
 }

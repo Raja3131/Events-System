@@ -1,1 +1,1 @@
-export const URL='http://localhost:5000/api/events';
+export const URL='http://localhost:5000/events';
