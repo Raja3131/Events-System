@@ -11,7 +11,8 @@ export const getAllManagers = async (req, res) => {
 
 export const createManager = async (req, res) => {
     try {
-        const manager = await ManagerServices.createManager(req.body);
+        const body = req.body;
+        const manager = await ManagerServices.createManager(body);
         res.status(200).json(manager);
     } catch (error) {
         res.status(500).send(error);
