@@ -2,7 +2,7 @@ import { ManagerServices } from "../services/ManagerServices.js";
 
 export const getAllManagers = async (req, res) => {
     try {
-        const managers = await ManagerServices.getAllManagers();
+        const managers = await ManagerServices.getAllManager();
         res.status(200).json(managers);
     } catch (error) {
         res.status(500).send(error);
@@ -11,8 +11,7 @@ export const getAllManagers = async (req, res) => {
 
 export const createManager = async (req, res) => {
     try {
-        const body = req.body;
-        const manager = await ManagerServices.createManager(body);
+        const manager = await ManagerServices.createManager(req.body);
         res.status(200).json(manager);
     } catch (error) {
         res.status(500).send(error);

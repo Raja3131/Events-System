@@ -1,28 +1,26 @@
-import {GET_MANAGER, POST_MANAGER, PUT_MANAGER, DELETE_MANAGER} from '../../Constants/constant';
-export const getManager=() => {
+export const getData = () => {
     return {
-        type: GET_MANAGER,
+      type: "GET",
     }
-};
-
-
-export const postManager=(data)=>{
-return{
-    type:POST_MANAGER,
+  };
+  
+  export const putData = (data) => {
+    return {
+      type: "PUT",
+      id:data._id,
+      data
+    }
+  };
+  export const postData=(data)=>{
+  return{
+    type:"POST",
     data
-}
-}
-
-export const putManager = (id,data) => {
-    return {
-        type: PUT_MANAGER,
-        id,
-        data
-    }
-}
-export const deleteManager=(id)=>{
-return{
-    type:DELETE_MANAGER,
-    id
-}
-}
+  }
+  }
+  export const deleteData=(id)=>{
+    console.log(id)
+  return{
+    type:"DELETE",
+    id:id._id
+  }
+  }

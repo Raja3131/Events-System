@@ -87,7 +87,7 @@ let [initialval,setInitialval]=useState(initial)
         <div>
             <Formik
                 initialValues={initialval}
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 enableReinitialize={true}
                 onSubmit={handleSubmit}
             >
@@ -121,7 +121,7 @@ let [initialval,setInitialval]=useState(initial)
                                     <Grid container item xs={6} spacing={0}>
                                         
                                         <Grid item xs={3}>                                            
-                                            <Buttons dirty={dirty} isValid={isValid} type='submit' name='submit' reset={setAction} />
+                                            <Buttons  type='submit' name='submit' reset={setAction} />
                                         </Grid>
                                         { 
                                         mode?

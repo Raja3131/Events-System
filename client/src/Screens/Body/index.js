@@ -2,13 +2,10 @@ import React from "react";
 import Nav from "./Nav";
 import {Routes,Route } from "react-router-dom";
 import Event from "./Main/Event/Event";
-<<<<<<< HEAD
 import Border from "../../Hoc/Form";
 import {useSelector} from 'react-redux'
-const HocEvent=Border(Event)
-=======
-import EventManager from "./Main/Manager/ManagerForm/ManagerForm";
->>>>>>> 02521bdf8cdf9e73a77cde94ffad753bfb9c56fe
+// const HocEvent=Border(Event)
+import Manager from "./Main/Manager/ManagerForm/ManagerForm";
 
 export default function Body(){
 
@@ -22,13 +19,10 @@ export default function Body(){
             <div style={{height:'100%',width:'80%',padding:'2%'}}>
                 <h3 style={{textAlign:'center'}}>{state}</h3>
                 <Routes>
-<<<<<<< HEAD
-                    <Route exact path='/' element={<HocEvent/>}/>
-=======
+                    {/* <Route exact path='/' element={<HocEvent/>}/> */}
                     <Route exact path='/' element={<Event/>}/>
-                    <Route path='/manager' element={<EventManager/>}/>
+                    <Route path='/manager' element={<Manager/>}/>
                     
->>>>>>> 02521bdf8cdf9e73a77cde94ffad753bfb9c56fe
                 </Routes>
             </div>
         </div>

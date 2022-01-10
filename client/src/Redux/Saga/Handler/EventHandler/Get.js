@@ -1,5 +1,4 @@
 import {call,put,takeLatest,fork} from 'redux-saga/effects'
-import React from 'react'
 import { GetRequest,PutRequest,PostRequest,DeleteRequest} from '../../Request/EventRequest/Get'
 
 function* GetRequests(){

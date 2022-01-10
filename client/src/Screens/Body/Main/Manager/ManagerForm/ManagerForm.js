@@ -4,8 +4,12 @@ import validationSchema from "./ManagerValidation";
 import { TextField } from "formik-material-ui"
 import ManagerList from "../ManagerList/ManagerList";
 import { useDispatch, useSelector } from "react-redux";
-import { getManager, putManager, postManager, deleteManager } from "../../../../../Redux/Action/ManagerAction/ManagerAction";
+import { getData,putData,postData,deleteData } from "../../../../../Redux/Action/ManagerAction/ManagerAction";
 import {useEffect} from 'react'
+import { Autocomplete } from '@material-ui/lab'
+import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 
 import {
@@ -20,13 +24,18 @@ import {
     Button,
     CardHeader,
     FormControl,
+    Typography,
   } from "@material-ui/core"
   const options = [
     { label: "Sponsor", value: "sponsor" },
     { label: "Organizer", value: "organizer" },
   ]
 
-export default function Event(){
+export default function Manager(){
+  const defaultColDef = {
+    filter: true,
+    flex: 1
+  };
 
 
  const [date,setDate]=useState(null)
@@ -41,16 +50,22 @@ export default function Event(){
  website: "",
  validateOnMount: true,
 })
-const manager=useSelector(state=>state.manager)
+const [showButton,setShowButton]=useState(false)
+const manager=useSelector(state=>state.data.data)
+console.log(manager)
 const dispatch=useDispatch()
 useEffect(()=>{
-    dispatch(getManager())
+    dispatch(getData())
 },[dispatch])
 
+
+
     const handleSubmit=(values,formikHelpers)=>{
-        formikHelpers.resetForm();
-        dispatch(postManager(values))
+
         console.log(values)
+        formikHelpers.resetForm()
+        dispatch(postData(values))
+       
     }
 
     return(
@@ -60,6 +75,10 @@ useEffect(()=>{
               validationSchema={validationSchema }
               enableReinitialize={true}
               onSubmit={handleSubmit}
+              onChange={(values,formikHelpers)=>{
+               
+                
+              }}
               >
                 { 
                     ({dirty,isValid,values, handleChange,resetForm,handleBlur})=>{
@@ -79,6 +98,11 @@ useEffect(()=>{
                         />
                       </Grid>
                       <Grid item xs={12} sm={6} md={6}>
+ 
+
+
+
+
                         <Field
                           label="Last Name"
                           variant="outlined"
@@ -178,11 +202,10 @@ useEffect(()=>{
                           variant="outlined"
                           fullWidth
                           name="website"
-                          value={values.website}
                           type="website"
                           component={TextField}
                           onChange={handleChange}
-                        />
+                          />
                       </Grid>
                     </Grid>
                   </CardContent>
@@ -200,7 +223,8 @@ useEffect(()=>{
                     </Button>
                     <Button
                         disabled={null}
-                      variant="contained"
+                        variant="contained"
+                        value={values.website}
                       color="primary"
                       type="Submit"
                       onClick={resetForm}
@@ -212,7 +236,45 @@ useEffect(()=>{
                             )}
                    }
             </Formik>
-            <ManagerList/>
+
+         
+                  
+                    <div className="ag-theme-alpine" style={{height: 400, width:1200 }}>
+                    <AgGridReact
+                        rowData={manager}
+                        columnSelection="multiple"
+                        applyColumnDefOrder={true}
+        defaultColDef={defaultColDef}
+                        >
+                        <AgGridColumn field="firstName"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="lastName"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="occupation"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="address1"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="address2"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="email"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="password"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="phone"  sortable={ true } filter={ true } ></AgGridColumn>
+                        <AgGridColumn field="website"  sortable={ true } filter={ true } ></AgGridColumn>
+                        
+
+                       
+
+                        
+
+
+                    </AgGridReact>
+                </div>
+                
+
+             
+                 
+                  
+                   
+                
+                
+            
         </>
     )
+
+ 
 }
