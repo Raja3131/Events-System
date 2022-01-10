@@ -5,7 +5,7 @@ import { Typography, Grid } from "@mui/material";
 
 import Input from "../../../../Components/input";
 import Date from "../../../../Components/DatePicker";
-import { validationSchema } from "../../../../Components/Validations";
+// import { validationSchema } from "../../../../Components/Validations";
 import Buttons from "../../../../Components/button.js";
 import Location from "../../../../Components/Location";
 import { getData,putData,deleteData,postData} from '../../../../Redux/Action/EventAction/Action'
@@ -17,9 +17,19 @@ export default function Event() {
     const [startdate, setStartDate] = useState(null)
     const [enddate, setEndDate] = useState(null)
     const [mode,deletemode]=useState(false)
+
     const [des,setDes]=useState('')
     const [action,setAction]=useState('')
 
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, "0");
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+      };
+
+    // let currdate=new Date();
     let initial={
         description: '',
         sponsor: '',
@@ -49,6 +59,10 @@ let [initialval,setInitialval]=useState(initial)
         if(action==='delete'){
             console.log('delete')
         dispatch(deleteData(values))
+        setStartDate(null)
+        setEndDate(null)
+        setInitialval(initial)
+        deletemode(false)
         formikHelpers.resetForm()
         return
         }
@@ -66,7 +80,6 @@ let [initialval,setInitialval]=useState(initial)
         let count=1;
         for(let x in val){
             if(x=='_id'){
-                console.log('put')
                 dispatch(putData(values))
                 setInitialval(initial)
                 deletemode(false)
@@ -74,7 +87,6 @@ let [initialval,setInitialval]=useState(initial)
             }
         }
         if(count==1){
-            console.log('post')
             dispatch(postData(val))
             formikHelpers.resetForm();
         }
@@ -87,7 +99,7 @@ let [initialval,setInitialval]=useState(initial)
         <div>
             <Formik
                 initialValues={initialval}
-                validationSchema={validationSchema}
+                // validationSchema={validationSchema}
                 enableReinitialize={true}
                 onSubmit={handleSubmit}
             >
@@ -97,39 +109,82 @@ let [initialval,setInitialval]=useState(initial)
                             <Form >
                                 <Grid container item xs={12} spacing={5}>
                                     <Grid item xs={3}>
-                                        <Auto deletemode={deletemode} setEndDate={setEndDate} setStartDate={setStartDate} put={setInitialval} des={des} setDes={setDes} onchange={handleChange} name='description' value={values.description} option={val} label='description' />
+                                        <Auto 
+                                          deletemode={deletemode}
+                                          setEndDate={setEndDate}
+                                          setStartDate={setStartDate} 
+                                          put={setInitialval} des={des} 
+                                          setDes={setDes} 
+                                          onchange={handleChange} 
+                                          name='description' 
+                                          value={values.description} 
+                                          option={val} 
+                                          label='description' />
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Date max={enddate}  value={startdate} name='startdate' label="Event start date" setDate={setStartDate} />
+                                        <Date 
+                                            max={enddate}  
+                                            value={startdate} 
+                                            name='startdate' 
+                                            label="Event start date" 
+                                            setDate={setStartDate} />
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Date min={startdate} value={enddate} name='enddate' label="Event end date" setDate={setEndDate} />
+                                        <Date 
+                                            min={startdate} 
+                                            value={enddate} 
+                                            name='enddate' 
+                                            label="Event end date" 
+                                            setDate={setEndDate} />
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Input value={values.venue} name='venue' label='venue' onchange={handleChange} />
+                                        <Input 
+                                            value={values.venue} 
+                                            name='venue' 
+                                            label='venue' 
+                                            onchange={handleChange} />
                                     </Grid>
                                 </Grid>
                                 <Location Location='Location' value={values} onchange={handleChange} />
                                 <Typography>Chief Bearear</Typography>
                                 <Grid container item xs={12} spacing={5}>
                                     <Grid item xs={3}>
-                                        <Input value={values.sponsor} name='sponsor' label='Event Sponsor' onchange={handleChange} />
+                                        <Input 
+                                            value={values.sponsor} 
+                                            name='sponsor' 
+                                            label='Event Sponsor' 
+                                            onchange={handleChange} />
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Input value={values.organizer} name='organizer' label='Event Organizer' onchange={handleChange} />
+                                        <Input 
+                                            value={values.organizer}
+                                            name='organizer' 
+                                            label='Event Organizer' 
+                                            onchange={handleChange} />
                                     </Grid>
-                                    <Grid container item xs={6} spacing={0}>
+                                    <Grid container item xs={6}n spacing={2} direction={'row'} justifyContent="flex-end" alignItems="center">
                                         
-                                        <Grid item xs={3}>                                            
-                                            <Buttons dirty={dirty} isValid={isValid} type='submit' name='submit' reset={setAction} />
+                                        <Grid item>                                            
+                                            <Buttons  
+                                                    isValid={values.venue!==''&&(values.description!==''||des!=='')&&startdate!==''&&enddate!==''&&values.country!==''&&values.district!==''&&values.state!==''&&values.city!==''&&values.sponsor!==''&&values.organizer!==''?false:true} 
+                                                    type='submit' 
+                                                    name='submit' 
+                                                    reset={setAction} />
                                         </Grid>
                                         { 
                                         mode?
-                                             <Grid item xs={3}>
-                                                   <Buttons type='submit' name='delete' reset={setAction}/>
+                                             <Grid >
+                                                   <Buttons 
+                                                        type='submit' 
+                                                        name='delete' 
+                                                        reset={setAction}/>
                                              </Grid>:
-                                             <Grid item xs={3}>
-                                                   <Buttons type='submit' name='clear' reset={setAction}/>
+                                             <Grid item >
+                                                   <Buttons 
+                                                        isValid={values.venue!==''||(values.description!==''||des!=='')||startdate!==null||enddate!==null||values.country!==''||values.district!==''||values.state!==''||values.city!==''||values.sponsor!==''||values.organizer!==''?false:true}
+                                                        type='submit' 
+                                                        name='clear' 
+                                                        reset={setAction}/>
                                              </Grid>
                                         }
                                     </Grid>

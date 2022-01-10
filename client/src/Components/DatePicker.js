@@ -14,6 +14,7 @@ const Date=({value,setDate,label,min,max})=>{
     return( <LocalizationProvider dateAdapter={AdapterDateFns} dateFormats={formats}>
                                         <DatePicker
                                             style={{height:'10px'}}
+                                            disablePast
                                             minDate={min}
                                             maxDate={max}
                                             label="Responsive"

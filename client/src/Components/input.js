@@ -5,7 +5,8 @@ import { TextField } from "formik-material-ui"
 
 const Input=({name,value,label,onchange})=>{
 return(
-    <Field 
+    <Field   
+             
              size='small'
              name={name} 
              value={value}

@@ -4,20 +4,47 @@ const promoterSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true
-
-    },
-    email: {
+      },
+      gst: {
         type: String,
         required: true,
-        unique: true
-
-    },
-    password: {
+      },
+      aadhar: {
         type: String,
-        required: true
-
-    }
+        required: true,
+      },
+      pan: {
+        type: String,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
+      district: {
+        type: String,
+        required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      country2: {
+        type: String,
+      },
+      district2: {
+        type: String,
+      },
+      state2: {
+        type: String,
+      },
+      city2: {
+        type: String,
+      }
 })
 
 const PromoterSchema= mongoose.model('PromoterSchema',promoterSchema);
