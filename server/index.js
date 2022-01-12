@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import EventsRouter from './src/routes/EventsRoutes.js'
 import ManagerRouter from './src/routes/ManagerRoutes.js'
 import PromoterRouter from './src/routes/PromoterRoutes.js'
+import LocationRouter from './src/routes/LocationRoutes.js'
 
 
 const app = express();
@@ -24,3 +25,4 @@ mongoose.connect(DB,{ useNewUrlParser: true,useUnifiedTopology: true })
 app.use('/events',EventsRouter)
 app.use('/managers',ManagerRouter)
 app.use('/promoters',PromoterRouter)
+app.use('/locations',LocationRouter)
