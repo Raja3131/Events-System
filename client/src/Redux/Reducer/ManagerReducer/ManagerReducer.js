@@ -1,33 +1,42 @@
-import {GET_MANAGER, POST_MANAGER, PUT_MANAGER, DELETE_MANAGER} from '../../../Redux/Constants/constant';
-const ManagerReducer = (state = [], action) => {
-    switch (action.type) {
-        case GET_MANAGER:
-            return state;
-        case POST_MANAGER:
-            let newList = [...state];
-            newList.push(action.data);
-            return newList;
-        case PUT_MANAGER:
-            let newList1 = [...state];
-            newList1.map((item, index) => {
-                if (item._id === action.id) {
-                    newList1[index] = action.data;
+let initial = { data: [] }
 
+const Manager = (state = initial, action) => {
+    switch (action.type) {
+        case 'MANAGERGET':
+        case 'MANAGERPOST':
+        case 'MANAGERPUT':
+        case 'MANAGERDELETE':
+            return state;
+        case 'GETMANAGER':
+            return { ...state, data: action.data };
+        case 'POSTMANAGER':
+            let newlist = [...state.data];
+            newlist.push(action.data)
+            let newState = {
+                ...state,
+                data: newlist
+            }
+            return newState;
+        case 'PUTMANAGER':
+            const array = [...state.data];
+            for (let i = 0; i < array.length; i++) {
+                if (array[i]._id === action.id) {
+                    array.splice(i, 1, action.data)
+                    return { ...state, data: array }
                 }
-            })
-            return newList1;
-        case DELETE_MANAGER:
-            let newList2 = [...state];
-            newList2.map((item, index) => {
-                if (item._id === action.id) {
-                    newList2.splice(index, 1);
+            }
+        case 'DELETEMANAGER':
+            const deletearray = [...state.data];
+            for (let i = 0; i < deletearray.length; i++) {
+                if (deletearray[i]._id === action.id) {
+                    deletearray.splice(i, 1)
+                    return { ...state, data: deletearray }
                 }
-            })
-            break;
-            default:
-                return state;
-        
+            }
+        default:
+            return state;
     }
+
 }
 
-export default ManagerReducer;
+export default Manager
