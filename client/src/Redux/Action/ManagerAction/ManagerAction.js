@@ -21,6 +21,7 @@ export const putManager = (id,data) => {
     }
 }
 export const deleteManager=(id)=>{
+    console.log(id)
 return{
     type:DELETE_MANAGER,
     id

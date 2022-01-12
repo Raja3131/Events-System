@@ -47,20 +47,20 @@ function* DeleteRequests({id}){
     }
 }
 
-function* getSaga() {
-    yield takeLatest("MANAGERGET", GetRequests);
+function* getmanagerSaga() {
+    yield takeLatest("GET_MANAGER", GetRequests);
   }
 
-function* putSaga() {
-    yield takeLatest("MANAGERPUT", PutRequests);
+function* putmanagerSaga() {
+    yield takeLatest("PUT_MANAGER", PutRequests);
   }
 
-function* postSaga(){
-    yield takeLatest('MANAGERPOST',PostRequests);
+function* postmanagerSaga(){
+    yield takeLatest('POST_MANAGER',PostRequests);
 }
-function* deleteSaga(){
-    yield takeLatest('MANAGERDELETE',DeleteRequests)
+function* deletemanagerSaga(){
+    yield takeLatest('DELETE_MANAGER',DeleteRequests)
 }
   
    
-export const managerWatcher=[fork(getSaga),fork(putSaga),fork(postSaga),fork(deleteSaga)]
+export const managerWatcher=[fork(getmanagerSaga),fork(putmanagerSaga),fork(postmanagerSaga),fork(deletemanagerSaga)]

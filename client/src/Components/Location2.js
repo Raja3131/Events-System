@@ -3,6 +3,7 @@ import React from "react";
 import Input from "./input";
 
 const Location2=({Location,onchange,value})=>{
+    
     return(
         <div>
             <Typography>{Location}</Typography>

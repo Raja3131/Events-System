@@ -2,10 +2,10 @@ let initial = { data: [] }
 
 const Manager = (state = initial, action) => {
     switch (action.type) {
-        case 'MANAGERGET':
-        case 'MANAGERPOST':
-        case 'MANAGERPUT':
-        case 'MANAGERDELETE':
+        case 'GET_MANAGER':
+        case 'POST_MANAGER':
+        case 'PUT_MANAGER':
+        case 'DELETE_MANAGER':
             return state;
         case 'GETMANAGER':
             return { ...state, data: action.data };
@@ -26,9 +26,10 @@ const Manager = (state = initial, action) => {
                 }
             }
         case 'DELETEMANAGER':
+            console.log(action.id._id)
             const deletearray = [...state.data];
             for (let i = 0; i < deletearray.length; i++) {
-                if (deletearray[i]._id === action.id) {
+                if (deletearray[i]._id === action.id._id) {
                     deletearray.splice(i, 1)
                     return { ...state, data: deletearray }
                 }

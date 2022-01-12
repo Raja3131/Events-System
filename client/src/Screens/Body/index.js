@@ -5,7 +5,7 @@ import Nav from "./Nav";
 import Border from "../../Hoc/Form";
 import Event from "./Main/Event/Event";
 import Client from "./Main/Client/client";
-// import EventManager from "./Main/Manager/ManagerForm/ManagerForm";
+import Eventmanager from '../Body/Main/Manager/ManagerForm/ManagerForm'
 
 const HocEvent=Border(Event)
 const HocClient=Border(Client)
@@ -24,7 +24,8 @@ export default function Body(){
                 <h3 style={{textAlign:'center'}}>{state}</h3>
                 <Routes>
                     <Route exact path='/' element={<HocEvent/>}/>
-                    <Route exact path='/client' element={<HocClient/>}/>
+                    <Route  path='/client' element={<HocClient/>}/>
+                    <Route  path='/manager' element={<Eventmanager/>}/>
                 </Routes>
             </div>
         </div>

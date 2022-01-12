@@ -3,14 +3,18 @@ import { Manager_URL } from "../../../Api/EventApi";
 
 export const GetRequest=async()=>{
 
-  return await axios.get(Manager_URL).then((response)=>response.data).catch((err)=>console.log(err))
+  return await axios.get(Manager_URL)
+               .then((response)=>response.data)
+               .catch((err)=>console.log(err))
 
 }
 
 export const PutRequest=async(id,data)=>{
+
    return await axios.put(`${Manager_URL}/${id}`,data).then((response)=>response).catch(()=>{
        console.log('err')
    })
+
 }
 
 export const PostRequest=async(data)=>{

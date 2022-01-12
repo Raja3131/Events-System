@@ -4,6 +4,9 @@ import mongoose from 'mongoose'
 import EventsRouter from './src/routes/EventsRoutes.js'
 import ManagerRouter from './src/routes/ManagerRoutes.js'
 import PromoterRouter from './src/routes/PromoterRoutes.js'
+import EventSchema from './src/models/EventModel.js';
+
+// import {name} from './src/Functionalities/Event'
 
 
 const app = express();
@@ -18,9 +21,16 @@ const PORT = process.env.PORT || 5000;
 const DB= 'mongodb://localhost:27017/events'
 
 mongoose.connect(DB,{ useNewUrlParser: true,useUnifiedTopology: true })
-.then((app.listen(PORT, () => {console.log(`Server is running on port ${PORT}`)})))
+.then((app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
+    // name()
+})))
 .catch(err => console.log(err))
 
 app.use('/events',EventsRouter)
 app.use('/managers',ManagerRouter)
 app.use('/promoters',PromoterRouter)
+
+
+    let Result=await EventSchema.find({name:'India'})
+    // console.log(Result)

@@ -41,16 +41,17 @@ export default function Event(){
  website: "",
  validateOnMount: true,
 })
-const manager=useSelector(state=>state.manager)
+// const manager=useSelector(state=>state.manager.data)
 const dispatch=useDispatch()
+
 useEffect(()=>{
     dispatch(getManager())
 },[dispatch])
 
     const handleSubmit=(values,formikHelpers)=>{
-        formikHelpers.resetForm();
+
         dispatch(postManager(values))
-        console.log(values)
+        formikHelpers.resetForm();
     }
 
     return(

@@ -4,14 +4,12 @@ const mangerSchema = new mongoose.Schema({
     firstName: {
 
         type: String,
-        required: true,
-        unique: true
+        required: true
         
     },
     lastName: {
         type: String,
         required: true,
-        unique: true
     },
     occupation: {
         type: String,
@@ -30,7 +28,6 @@ const mangerSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
     },
     password: {
         type: String,
@@ -40,7 +37,6 @@ const mangerSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
-        unique: true
     },
     website: {
         type: String,

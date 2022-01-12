@@ -13,7 +13,7 @@ export default function Nav() {
                  { title: 'Client Details', path: 'client' ,padding:'3% 31%'},
                  { title: 'Promoter Details', path: 'promoter' ,padding:'3% 26%'},
                  { title: 'Registration Details', path: 'client',padding:'3% 21%' },
-                    { title: 'Manager Details', path: 'manager',padding:'3% 24%' },
+                { title: 'Manager Details', path: 'manager',padding:'3% 24%' },
 
                 ];
 
