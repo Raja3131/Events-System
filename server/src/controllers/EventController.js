@@ -1,4 +1,5 @@
 import {EventServices}  from "../services/EventServices.js";
+import csc from 'countries-states-cities'
 
 export const getAllEvents = async (req, res) =>{
     try {
@@ -53,3 +54,16 @@ export const deleteEvent = async (req, res) =>{
     }
         
     }
+
+ export const getCountry = async (req, res) =>{
+    try {
+        const country = await EventServices.getCountry();
+        res.status(200).json(country);
+        
+    } catch (error) {
+        res.status(500).send(error);
+    }
+        
+    }      
+
+    

@@ -6,7 +6,7 @@ import ManagerRouter from './src/routes/ManagerRoutes.js'
 import PromoterRouter from './src/routes/PromoterRoutes.js'
 import EventSchema from './src/models/EventModel.js';
 
-// import {name} from './src/Functionalities/Event'
+import LocationRouter from './src/routes/LocationRoutes.js'
 
 
 const app = express();
@@ -34,3 +34,4 @@ app.use('/promoters',PromoterRouter)
 
     let Result=await EventSchema.find({name:'India'})
     // console.log(Result)
+app.use('/locations',LocationRouter)

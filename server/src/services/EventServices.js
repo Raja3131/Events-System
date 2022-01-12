@@ -1,4 +1,5 @@
 import EventSchema from "../models/EventModel.js";
+import csc from 'countries-states-cities'
 
 export const EventServices = {
     getAllEvents: async () => {
@@ -22,7 +23,8 @@ export const EventServices = {
     deleteEvent: async (id) => {
         const deletedEvent = await EventSchema.findByIdAndDelete(id);
         return deletedEvent;
-    }
+    },
+ 
 }
 
 
