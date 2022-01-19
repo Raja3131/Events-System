@@ -3,10 +3,10 @@ import {Field}from 'formik'
 import { TextField } from "formik-material-ui"
 
 
-const Input=({name,value,label,onchange})=>{
+const Input=({name,value,label,onchange,required})=>{
 return(
     <Field   
-             
+             required={required}
              size='small'
              name={name} 
              value={value}

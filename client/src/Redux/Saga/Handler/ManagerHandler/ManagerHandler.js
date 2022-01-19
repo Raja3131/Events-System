@@ -18,7 +18,6 @@ function* PutRequests({id,data}){
         }
         
     }catch(err){
-        console.log('error')
         console.log(err)
     }
 }
@@ -28,16 +27,15 @@ function* PostRequests({data}){
         try{
         let Res=yield call(PostRequest,data)
         if(Res.status === 200){ 
-            yield put({type:'POSTMANAGER',data:data})
+            yield put({type:'POSTMANAGER',data:Res.data})
         }
         }catch(err){
-        console.log(err)
+        console.log('err',err)
         }
 }
 
 function* DeleteRequests({id}){
     try{
-        console.log(id)
         let Res=yield call(DeleteRequest,id)
         if(Res.status===200){
             yield put({type:'DELETEMANAGER',id:Res.data})

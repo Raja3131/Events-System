@@ -28,20 +28,22 @@ import {
 
 export default function Event(){
 
+  let initial={  
+                firstName: "",
+                lastName: "",
+                occupation: "",
+                address1: "",
+                address2: "",
+                email: "",
+                password: "",
+                phone: "",
+                website: "",
+                validateOnMount: true,
+           }
 
  const [date,setDate]=useState(null)
- const [initialValues, setInitialValues] = useState({  firstName: "",
- lastName: "",
- occupation: "",
- address1: "",
- address2: "",
- email: "",
- password: "",
- phone: "",
- website: "",
- validateOnMount: true,
-})
-// const manager=useSelector(state=>state.manager.data)
+ const [initialValues, setInitialValues] = useState(initial)
+const manager=useSelector(state=>state.manager.data)
 const dispatch=useDispatch()
 
 useEffect(()=>{
@@ -49,9 +51,21 @@ useEffect(()=>{
 },[dispatch])
 
     const handleSubmit=(values,formikHelpers)=>{
-
-        dispatch(postManager(values))
+        let count=1;
+      for(let x in initialValues){     
+        if(x=='_id'){
+            dispatch(putManager(values))
+            setInitialValues(initial)
+            count+=1
+        }
+    }
+        if(count===1){
+          dispatch(postManager(values))
         formikHelpers.resetForm();
+        }
+    }
+    const clear=()=>{
+      setInitialValues(initial)
     }
 
     return(
@@ -194,7 +208,6 @@ useEffect(()=>{
                       variant="contained"
                       color="primary"
                       type="Submit"
-                      onClick={handleSubmit}
                       
                       >
                       REGISTER
@@ -203,8 +216,7 @@ useEffect(()=>{
                         disabled={null}
                       variant="contained"
                       color="primary"
-                      type="Submit"
-                      onClick={resetForm}
+                      onClick={()=>clear()}
 
                     >
                       Clear
@@ -213,7 +225,7 @@ useEffect(()=>{
                             )}
                    }
             </Formik>
-            <ManagerList/>
+            <ManagerList val={initial} upval={setInitialValues}/>
         </>
     )
 }

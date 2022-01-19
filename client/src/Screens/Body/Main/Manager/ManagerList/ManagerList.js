@@ -1,8 +1,9 @@
 import { getManager,putManager,postManager,deleteManager } from "../../../../../Redux/Action/ManagerAction/ManagerAction";
 import {useDispatch,useSelector} from 'react-redux'
 import { useEffect } from "react";
+import swal from 'sweetalert'
 
-const ManagerList = () => {
+const ManagerList = ({val,upval}) => {
 
     const dispatch=useDispatch()
     useEffect(() => {
@@ -10,6 +11,27 @@ const ManagerList = () => {
     }, [dispatch]);
     const manager=useSelector(state=>state.manager.data)
     
+    const update=(item)=>{
+        console.log(item)
+        upval(item)
+    }
+    const Delete=(item)=>{
+        swal({
+            title:'Are you sure?', 
+            text:'Once deleted,You Will not be able to recover this file!',
+            icon:'warning',
+            buttons:false,
+            dangerMode:true,
+            buttons:['No','Yes']
+        }).then(async(willDelete)=>{
+            if(willDelete){
+                dispatch(deleteManager(item._id))
+                swal('Your file has been deleted!',{icon:'success'})
+            }else{
+                swal('Your file is safe!')
+            }
+        })
+    }
     return (
         <div>
             <table className="table table-striped">
@@ -34,8 +56,8 @@ const ManagerList = () => {
                                 <td>{item.phone}</td>
                                 <td>{item.address1}</td>
                                 <td>
-                                    <button className="btn btn-primary" onClick={()=>dispatch(putManager(item._id,item))}>Edit</button>
-                                    <button className="btn btn-danger" onClick={()=>dispatch(deleteManager(item._id))}>Delete</button>
+                                    <button className="btn btn-primary" onClick={()=>update(item)}>Edit</button>
+                                    <button className="btn btn-danger" onClick={()=>Delete(item)}>Delete</button>
                                 </td>
                             </tr>
                         )

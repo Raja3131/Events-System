@@ -1,5 +1,5 @@
 import EventSchema from "../models/EventModel.js";
-import csc from 'countries-states-cities'
+// import csc from 'countries-states-cities'
 
 export const EventServices = {
     getAllEvents: async () => {

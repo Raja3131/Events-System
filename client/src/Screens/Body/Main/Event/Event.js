@@ -15,6 +15,7 @@ import Buttons from "../../../../Components/button.js";
 import Location from "../../../../Components/Location";
 import { getData,putData,deleteData,postData} from '../../../../Redux/Action/EventAction/Action'
 import Auto from "../../../../Components/Autocomplete";
+import axios from "axios";
 
 export default function Event() {
 
@@ -24,7 +25,7 @@ let curdate=new Date()
     const [startdate, setStartDate] = useState(null)
     const [enddate, setEndDate] = useState(null)
     const [mode,deletemode]=useState(false)
-    
+    const [dis,setdis]=useState('')
     const [open,setOpen]=useState(false)
 
     const [des,setDes]=useState('')
@@ -93,7 +94,7 @@ let [initialval,setInitialval]=useState(initial)
 
     const handleSubmit = async(values, formikHelpers) => {
 
-          
+          console.log(values)
         
 
         if(action==='delete'){
@@ -192,6 +193,8 @@ let [initialval,setInitialval]=useState(initial)
         setOpen(false)
     }
 
+    
+
     return (
         <div>
             
@@ -249,7 +252,15 @@ let [initialval,setInitialval]=useState(initial)
                                             onchange={handleChange} />
                                     </Grid>
                                 </Grid>
-                                <Location Location='Location' value={values} onchange={handleChange} />
+                                <Location 
+                                Location='Location' 
+                                dis={dis}
+                                setdis={setdis}
+                                setDes={setDes} 
+                                des={des}  
+                                setInitialval={setInitialval} 
+                                value={values} 
+                                onchange={handleChange} />
                                 <Typography>Chief Bearear</Typography>
                                 <Grid container item xs={12} spacing={5}>
                                     <Grid item xs={3}>

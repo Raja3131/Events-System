@@ -1,5 +1,5 @@
 import {EventServices}  from "../services/EventServices.js";
-import csc from 'countries-states-cities'
+// import csc from 'countries-states-cities'
 
 export const getAllEvents = async (req, res) =>{
     try {

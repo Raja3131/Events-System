@@ -13,10 +13,10 @@ return{
 }
 }
 
-export const putManager = (id,data) => {
+export const putManager = (data) => {
     return {
         type: PUT_MANAGER,
-        id,
+        id:data._id,
         data
     }
 }

@@ -11,6 +11,7 @@ const Manager = (state = initial, action) => {
             return { ...state, data: action.data };
         case 'POSTMANAGER':
             let newlist = [...state.data];
+            console.log(action.data)
             newlist.push(action.data)
             let newState = {
                 ...state,
@@ -26,7 +27,6 @@ const Manager = (state = initial, action) => {
                 }
             }
         case 'DELETEMANAGER':
-            console.log(action.id._id)
             const deletearray = [...state.data];
             for (let i = 0; i < deletearray.length; i++) {
                 if (deletearray[i]._id === action.id._id) {

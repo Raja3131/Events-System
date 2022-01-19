@@ -1,6 +1,12 @@
 import {  Grid } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+import {Dialog,DialogContent} from '@mui/material';
+import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 import { Form, Formik } from "formik";
-import React,{useState,useEffect} from "react";
+import swal from "sweetalert";
+import React,{useState,useEffect,useMemo} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import Auto from "../../../../Components/Autocomplete";
 import Input from "../../../../Components/input";
@@ -9,8 +15,6 @@ import Location from "../../../../Components/Location";
 import Location2 from "../../../../Components/Location2";
 import { validationSchema } from "../../../../Components/Validations";
 import {getData,deleteData,postData,putData} from '../../../../Redux/Action/ClientAction/Action.js'
-import { Success } from "../../../../Components/Alerts/Success";
-import { Update } from "../../../../Components/Alerts/Update";
 
 const Client = () => {
 
@@ -19,6 +23,10 @@ const Client = () => {
     
     const [des,setDes]=useState('')
     const [action,setAction]=useState('')
+    const [open,setOpen]=useState(false)
+    const [gridApi, setGridApi] = useState(null);
+
+
 
     let initial={
         name:'',
@@ -37,6 +45,25 @@ const Client = () => {
     }
 const [initialval,setInitialval]=useState(initial)
 
+const defaultColDef = useMemo( ()=> ({
+    resizable: true,
+    editable: true,
+    sortable: true,
+    flex: 1
+}), []);
+
+  const  onGridReady = params => {
+    setGridApi(params.api)
+  };
+
+  const onSelectionChanged = () => {
+    const selectedRows = gridApi.getSelectedRows();
+        setInitialval(selectedRows[0])
+        deletemode(true)
+        setOpen(false)
+  }
+
+
 let dispatch=useDispatch()
     let val=useSelector(state=>state.Client.data)
 
@@ -49,25 +76,45 @@ const handleSubmit = (values, formikHelpers) => {
         console.log(values)
         setLoad(!load)
         if(action==='delete'){
-        dispatch(deleteData(values))
-        setInitialval(initial)
-        deletemode(false)
-        formikHelpers.resetForm()
-        return
+            return  swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this file!",
+                icon: 'warning',
+                buttons: false,
+                dangerMode: true,
+                buttons: ['No', 'Yes']
+              })
+              .then(async(willDelete) => {
+                if (willDelete) {
+                    dispatch(deleteData(values))
+                    setInitialval(initial)
+                    deletemode(false)
+                    formikHelpers.resetForm()
+                    swal("Your file has been deleted!", {
+                        icon: "success",
+                      });
+                      setLoad(!load)
+                      return
+                } else {
+                  swal("Your file is safe!");
+                  
+                }
+              });
+        
         }
         if(action==='clear'){
             deletemode(false)
+            setInitialval(initial)
             formikHelpers.resetForm()
             return
         }
 
-        let val={...values,name:des}
+        let val={...values}
 
         let count=1;
         for(let x in val){
             if(x=='_id'){
                 dispatch(putData(values))
-                Update()
                 setInitialval(initial)
                 deletemode(false)
                 count+=1;
@@ -76,10 +123,14 @@ const handleSubmit = (values, formikHelpers) => {
         if(count==1){
             console.log('post')
             dispatch(postData(val))
-            Success()
             formikHelpers.resetForm();
         }  
     }
+
+    const handleClose=()=>{
+        setOpen(false)
+    } 
+
     return (
         <div>
             <Formik
@@ -94,7 +145,12 @@ const handleSubmit = (values, formikHelpers) => {
                             <Form autocomplete="off" >
                                     <Grid container item xs={12} spacing={5}>
                                         <Grid item xs={3}>
-                                            <Auto
+                                        <Input  required={true}
+                                                value={values.name}
+                                                name='name'
+                                                label='Name'
+                                                onchange={handleChange} />
+                                            {/* <Auto
                                                 deletemode={deletemode}
                                                 put={setInitialval} 
                                                 des={des}
@@ -103,10 +159,11 @@ const handleSubmit = (values, formikHelpers) => {
                                                 name='name'
                                                 value={values.name}
                                                 option={val}
-                                                label='Name' />
+                                                label='Name' /> */}
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Input
+                                                required={true}
                                                 value={values.gst}
                                                 name='gst'
                                                 label='GST'
@@ -114,6 +171,7 @@ const handleSubmit = (values, formikHelpers) => {
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Input
+                                                required={true}
                                                 value={values.aadhar}
                                                 name='aadhar'
                                                 label='Aadhar'
@@ -121,6 +179,7 @@ const handleSubmit = (values, formikHelpers) => {
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Input
+                                                required={true}
                                                 value={values.pan}
                                                 name='pan'
                                                 label='PAN'
@@ -129,7 +188,7 @@ const handleSubmit = (values, formikHelpers) => {
                                     </Grid>
 
                                     <Location Location='Address 1' value={values} onchange={handleChange}/>
-                                    <Location2 Location='Address 2' value={values} onchange={handleChange}/>
+                                     <Location2 Location='Address 2' value={values} onchange={handleChange}/>
 
                                     <br/>
 
@@ -149,21 +208,56 @@ const handleSubmit = (values, formikHelpers) => {
                                                         type='submit' 
                                                         name='delete' 
                                                         reset={setAction}/>
-                                             </Grid>:
+                                             </Grid>:null
+                                             }
                                              <Grid item >
                                                    <Buttons 
                                                         isValid={(values.name!==''||des!=='')||values.country!==''||values.district!==''||values.state!==''||values.city!==''||values.gst!==''||values.aadhar!==''||values.pan!==''?false:true}
                                                         type='submit' 
                                                         name='clear' 
                                                         reset={setAction}/>
-                                             </Grid>
-                                        }
+                                             </Grid>                                        
                                     </Grid>
                             </Form>
                         )
                     }
                 }
             </Formik>
+            <button style={{backgroundColor:'red'}} onClick={()=>{
+                setOpen(true)
+                console.log(open)
+            }}><EditIcon/></button>
+            <Dialog
+                    fullWidth
+                    maxWidth='xl'
+                    open={open}
+                    onClose={handleClose}>
+                        <div>
+                   <DialogContent>
+                       <div className="ag-theme-alpine" style={{height: 400, width: 'auto'}}>
+                          <AgGridReact
+                           onGridReady={onGridReady}
+                           rowSelection={'single'}
+                           onSelectionChanged={onSelectionChanged}
+                           defaultColDef={defaultColDef}
+                           rowData={val}>
+                                <AgGridColumn filter={true} field="name"></AgGridColumn>
+                                <AgGridColumn filter={true} field="gst"></AgGridColumn>
+                                <AgGridColumn filter={true} field="aadhar"></AgGridColumn>
+                                <AgGridColumn filter={true} field="pan"></AgGridColumn>
+                                <AgGridColumn filter={true} field="state"></AgGridColumn>
+                                <AgGridColumn filter={true} field="country"></AgGridColumn>
+                                <AgGridColumn filter={true} field="district"></AgGridColumn>
+                                <AgGridColumn filter={true} field="city"></AgGridColumn>
+                                <AgGridColumn filter={true} field="state2"></AgGridColumn>
+                                <AgGridColumn filter={true} field="country2"></AgGridColumn>
+                                <AgGridColumn filter={true} field="district2"></AgGridColumn>
+                                <AgGridColumn filter={true} field="city2"></AgGridColumn>
+                          </AgGridReact>
+                       </div>
+                   </DialogContent>
+             </div>
+        </Dialog>
         </div>
     )
 }

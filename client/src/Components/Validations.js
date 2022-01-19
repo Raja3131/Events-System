@@ -1,11 +1,15 @@
 import * as Yup from 'yup'
 import {lowercaseRegEx,uppercaseRegEx,numericRegEx,lengthRegEx} from './RegEx'
 
+let  phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 export let validationSchema = Yup.object({
-    aadhar: Yup.string().matches(numericRegEx,'number only allowed').matches(lengthRegEx,'please type valid aadhar').required("Required"),
-    // state: Yup.string().required("Required"),
-    // district: Yup.string().required("Required"),
-    // city: Yup.string().required("Required"),
+    name: Yup.string().required("Required"),
+    aadhar: Yup.string().matches(phoneRegExp,'number only allowed')
+                        .matches(lengthRegEx,'please type valid aadhar')
+                        .required("Required"),
+    pan: Yup.string().required("Required"),
+    gst: Yup.string().required("Required"), 
     // enddate: Yup.string().required("Required"),
     // startdate: Yup.string().required("Required"),
     // sponsor: Yup.string().required("Required"),
