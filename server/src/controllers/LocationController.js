@@ -12,3 +12,29 @@ export const getCountries = async (req, res) =>{
     }
         
     }
+
+    export const getStatesByCountry = async (req, res) =>{
+        try {
+            const state = await LocationServices.getStateByCountry(req.params.country);
+          
+            res.status(200).json(state);
+            
+        } catch (error) {
+            res.status(500).send(error);
+        }
+            
+     
+            
+        }
+
+   export const getCityByState = async (req, res) =>{
+    try {
+        const city = await LocationServices.getCityByState(req.params.country,req.params.state, );
+      
+        res.status(200).json(city);
+        
+    } catch (error) {
+        res.status(500).send(error);
+    }
+        
+    }     

@@ -32,6 +32,4 @@ app.use('/managers',ManagerRouter)
 app.use('/promoters',PromoterRouter)
 
 
-    let Result=await EventSchema.find({name:'India'})
-    // console.log(Result)
 app.use('/locations',LocationRouter)
