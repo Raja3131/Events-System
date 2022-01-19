@@ -28,8 +28,11 @@ app.use('/managers',ManagerRouter)
 app.use('/promoters',PromoterRouter)
 
 
+<<<<<<< HEAD
 let Result=await EventSchema.find({name:'India'})
 // console.log(Result)
+=======
+>>>>>>> 0b95cbb54ed63a5c63190a1bea67f7b5dd3eb926
 app.use('/locations',LocationRouter)
 
 // import { MongoClient } from "mongodb"
