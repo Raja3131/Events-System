@@ -9,12 +9,12 @@ export default function Nav() {
     let navigate=useNavigate()
     let dispatch=useDispatch()
 
-    const nav = [{ title: 'Event Handling', path: '/' ,padding:'3% 28%'},
-                 { title: 'Client Details', path: 'client' ,padding:'3% 31%'},
-                 { title: 'Promoter Details', path: 'promoter' ,padding:'3% 26%'},
-                 { title: 'Registration Details', path: 'client',padding:'3% 21%' },
-                { title: 'Manager Details', path: 'manager',padding:'3% 24%' },
-
+    const nav = [
+                 { title: 'Event Registration', path: '/' },
+                 { title: 'Client Details', path: 'client' },
+                 { title: 'Promoter Details', path: 'promoter' },
+                 { title: 'Registration Details', path: 'client'},
+                { title: 'Manager Details', path: 'manager'},
                 ];
 
     const route=(item)=>{

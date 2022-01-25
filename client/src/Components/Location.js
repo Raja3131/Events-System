@@ -5,23 +5,38 @@ import Input from "./input";
 import Auto from "./Autocomplete";
 import { LOCATION_URL,GET_LOCATION } from "../Redux/Api/EventApi";
 
-const Location=({Location,onchange,value,setInitialval,setDes,des,setdis,dis})=>{
+const Location=({Location,onchange,value,setInitialval,setDes,des})=>{
      
     // const [des,setDes]=useState('');
     const [val,setVal]=useState([])
     const [state,setState]=useState([])
+    const [dis,setdis]=useState('')
+    const [distric,setdistric]=useState([])
+    const [city,setcity]=useState('')
+
 
     useEffect(async()=>{
 
         await axios.get(LOCATION_URL).then((res)=>{
+            console.log(res)
             setVal(res.data)
         }).catch((err)=>console.log(err))
 
     },[])
 
     const get=async(item)=>{
-        await axios.post(GET_LOCATION,item)
-                    .then((res)=>setState(res.data))
+        console.log('item',item)
+        await axios.post(`${GET_LOCATION}/${item}`,item)
+                    .then((res)=>
+                    {  console.log(res.data)
+                        setState(res.data)})
+                    
+  }
+  const getState=async(item)=>{
+    await axios.post(`${GET_LOCATION}/${dis}/${item}`,item)
+    .then((res)=>
+    {  console.log(res.data)
+        setdistric(res.data)})
   }
 
     return(
@@ -44,9 +59,10 @@ const Location=({Location,onchange,value,setInitialval,setDes,des,setdis,dis})=>
                </Grid>
                 <Grid  item xs={3}>
                                            <Auto
+                                                get={getState}
                                                 put={setInitialval} 
-                                                dis={dis}
-                                                setdis={setdis}
+                                                des={dis}
+                                                setDes={setdis}
                                                 onchange={onchange}
                                                 name='state'
                                                 value={value.state}
@@ -62,7 +78,16 @@ const Location=({Location,onchange,value,setInitialval,setDes,des,setdis,dis})=>
                     value={value.state} /> */}
                 </Grid>
                 <Grid  item xs={3}>
-                     <Input required={true} type='text' name='district' label='District' onchange={onchange} value={value.district} />
+                                           <Auto
+                                                put={setInitialval} 
+                                                des={city}
+                                                setDes={setcity}
+                                                onchange={onchange}
+                                                name='district'
+                                                value={value.district}
+                                                option={distric}
+                                                label='District' />
+                     {/* <Input required={true} type='text' name='district' label='District' onchange={onchange} value={value.district} /> */}
                 </Grid>
                 <Grid  item xs={3}>
                     <Input required={true} type='text' name='city' label='City' onchange={onchange} value={value.city} />

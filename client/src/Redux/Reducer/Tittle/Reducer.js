@@ -1,5 +1,5 @@
 
-let store={name:'Event creation'};
+let store={name:'Event Registration'};
 
 let Tittle = (state=store , action) => {
     

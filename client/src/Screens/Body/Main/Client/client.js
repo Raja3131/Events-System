@@ -1,4 +1,4 @@
-import {  Grid } from "@mui/material";
+import {  Button, Grid } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import {Dialog,DialogContent} from '@mui/material';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
@@ -13,7 +13,7 @@ import Input from "../../../../Components/input";
 import Buttons from "../../../../Components/button";
 import Location from "../../../../Components/Location";
 import Location2 from "../../../../Components/Location2";
-import { validationSchema } from "../../../../Components/Validations";
+// import { validationSchema } from "../../../../Components/Validations";
 import {getData,deleteData,postData,putData} from '../../../../Redux/Action/ClientAction/Action.js'
 
 const Client = () => {
@@ -71,11 +71,13 @@ let dispatch=useDispatch()
        dispatch(getData())
     },[load])
 
-const handleSubmit = (values, formikHelpers) => {
-        
+    const handleSubmit = async(values, formikHelpers) => {
+
+        console.log('hai')
         console.log(values)
         setLoad(!load)
         if(action==='delete'){
+            console.log('delete')
             return  swal({
                 title: "Are you sure?",
                 text: "Once deleted, you will not be able to recover this file!",
@@ -103,6 +105,7 @@ const handleSubmit = (values, formikHelpers) => {
         
         }
         if(action==='clear'){
+            console.log('clear')
             deletemode(false)
             setInitialval(initial)
             formikHelpers.resetForm()
@@ -114,6 +117,7 @@ const handleSubmit = (values, formikHelpers) => {
         let count=1;
         for(let x in val){
             if(x=='_id'){
+                console.log('update')
                 dispatch(putData(values))
                 setInitialval(initial)
                 deletemode(false)
@@ -130,19 +134,25 @@ const handleSubmit = (values, formikHelpers) => {
     const handleClose=()=>{
         setOpen(false)
     } 
+    // const clear=(values,formikHelpers)=>{
+    //     debugger
+    //     console.log('clear function is working')
+    //     deletemode(false)
+    //     setInitialval(initial)
+    //     console.log(initialval)
+    // }
 
     return (
         <div>
             <Formik
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             initialValues={initialval}
-            autocomplete="off"
             enableReinitialize={true}
             onSubmit={handleSubmit}>
                 {
-                    ({handleChange,values }) => {
+                    ({handleChange,values ,resetForm}) => {
                         return (
-                            <Form autocomplete="off" >
+                            <Form >
                                     <Grid container item xs={12} spacing={5}>
                                         <Grid item xs={3}>
                                         <Input  required={true}
@@ -186,8 +196,8 @@ const handleSubmit = (values, formikHelpers) => {
                                                 onchange={handleChange} />
                                         </Grid>
                                     </Grid>
-
-                                    <Location Location='Address 1' value={values} onchange={handleChange}/>
+                        
+                                    {/* <Location Location='Address 1' setInitialval={setInitialval} setDes={setDes} des={des} value={values} onchange={handleChange}/> */}
                                      <Location2 Location='Address 2' value={values} onchange={handleChange}/>
 
                                     <br/>
@@ -211,11 +221,13 @@ const handleSubmit = (values, formikHelpers) => {
                                              </Grid>:null
                                              }
                                              <Grid item >
-                                                   <Buttons 
-                                                        isValid={(values.name!==''||des!=='')||values.country!==''||values.district!==''||values.state!==''||values.city!==''||values.gst!==''||values.aadhar!==''||values.pan!==''?false:true}
+                                                 <Button variant="contained" onClick={resetForm}>Clear</Button>
+                                                   {/* <Buttons 
+                                                        isValid={(values.name!==''||des!=='')||values.country!==''||values.district!==''||values.state!==''||values.city!==''||values.country2!==''||values.district2!==''||values.state2!==''||values.city2!==''||values.gst!==''||values.aadhar!==''||values.pan!==''?false:true}
                                                         type='submit' 
                                                         name='clear' 
-                                                        reset={setAction}/>
+                                                        
+                                                        reset={setAction}/> */}
                                              </Grid>                                        
                                     </Grid>
                             </Form>

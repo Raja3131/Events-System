@@ -6,10 +6,13 @@ import reducer from "../Reducer/index.js";
 export function configureStore() {
   let sagaMiddle = createSagaMiddleware();
   let store = compose(
-    applyMiddleware(sagaMiddle),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(sagaMiddle)
+    
   )(createStore)(reducer);
 
   sagaMiddle.run(RootSaga);
   return store;
 }
+
+
+// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

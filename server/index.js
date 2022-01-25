@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import EventsRouter from './src/routes/EventsRoutes.js'
 import ManagerRouter from './src/routes/ManagerRoutes.js'
 import PromoterRouter from './src/routes/PromoterRoutes.js'
-import EventSchema from './src/models/EventModel.js';
+import EventsRouters from './src/routes/EventRegisterRouter.js';
 
 import LocationRouter from './src/routes/LocationRoutes.js'
 
@@ -26,13 +26,9 @@ mongoose.connect(DB,{ useNewUrlParser: true,useUnifiedTopology: true })
 app.use('/events',EventsRouter)
 app.use('/managers',ManagerRouter)
 app.use('/promoters',PromoterRouter)
+app.use('/eventRegister',EventsRouters)
 
 
-<<<<<<< HEAD
-let Result=await EventSchema.find({name:'India'})
-// console.log(Result)
-=======
->>>>>>> 0b95cbb54ed63a5c63190a1bea67f7b5dd3eb926
 app.use('/locations',LocationRouter)
 
 // import { MongoClient } from "mongodb"

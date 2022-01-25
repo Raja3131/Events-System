@@ -7,4 +7,4 @@ export const Client_URL='http://localhost:5000/promoters';
 
 export const Manager_URL='http://localhost:5000/managers';
 
-export const GET_LOCATION='http://localhost:5000/states'
+export const GET_LOCATION='http://localhost:5000/locations'

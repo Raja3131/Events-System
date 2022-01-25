@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import {useSelector,useDispatch} from 'react-redux'
 import { Formik, Form } from 'formik'
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid ,Button} from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import {Dialog,DialogContent} from '@mui/material';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
@@ -25,7 +25,6 @@ let curdate=new Date()
     const [startdate, setStartDate] = useState(null)
     const [enddate, setEndDate] = useState(null)
     const [mode,deletemode]=useState(false)
-    const [dis,setdis]=useState('')
     const [open,setOpen]=useState(false)
 
     const [des,setDes]=useState('')
@@ -192,7 +191,14 @@ let [initialval,setInitialval]=useState(initial)
     const handleClose=()=>{
         setOpen(false)
     }
-
+const clear=(values)=>{
+        values()
+        setDes('')
+        console.log('clear function is working')
+        deletemode(false)
+        setInitialval(initial)
+        console.log(initialval)
+    }
     
 
     return (
@@ -208,7 +214,7 @@ let [initialval,setInitialval]=useState(initial)
                 {
                     ({ dirty, isValid, values, handleChange, resetForm }) => {
                         return (
-                            <Form >
+                            <Form  autoComplete="off" >
                                 <Grid container item xs={12} spacing={5}>
                                     <Grid item xs={3}>
                                         <Input 
@@ -254,8 +260,6 @@ let [initialval,setInitialval]=useState(initial)
                                 </Grid>
                                 <Location 
                                 Location='Location' 
-                                dis={dis}
-                                setdis={setdis}
                                 setDes={setDes} 
                                 des={des}  
                                 setInitialval={setInitialval} 
@@ -296,11 +300,12 @@ let [initialval,setInitialval]=useState(initial)
                                              </Grid>:null
                                         }
                                         <Grid item >
-                                                   <Buttons 
+                                        <Button variant="contained" onClick={()=>clear(resetForm)}>Clear</Button>
+                                                   {/* <Buttons 
                                                         isValid={clearval(values)}
                                                         type='submit' 
                                                         name='clear' 
-                                                        reset={setAction}/>
+                                                        reset={setAction}/> */}
                                              </Grid>
                                     </Grid>
                                 </Grid>

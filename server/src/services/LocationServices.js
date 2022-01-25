@@ -14,6 +14,5 @@ export const LocationServices = {
         const city = await City(`${country}`,`${state}`);
         return city;
     }
-   
 
 }

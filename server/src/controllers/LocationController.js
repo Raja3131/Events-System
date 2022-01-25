@@ -5,7 +5,6 @@ export const getCountries = async (req, res) =>{
         const country = await LocationServices.getCountry();
       
         res.status(200).json(country);
-
         
     } catch (error) {
         res.status(500).send(error);
