@@ -1,12 +1,12 @@
+import { getAllPromoters,createPromoter,getPromoterById,updatePromoter,deletePromoter } from "../controllers/PromoterController.js";
 import express from 'express'
-import {getAllPromoters, createPromoter, getPromoterById, updatePromoter, deletePromoter} from "../controllers/PromoterController.js";
 
+const PromoterRoutes = express.Router();
 
-const PromoterRouter = express.Router();
-PromoterRouter.get("/", getAllPromoters);
-PromoterRouter.post("/", createPromoter);
-PromoterRouter.get("/:id", getPromoterById);
-PromoterRouter.put("/:id", updatePromoter);
-PromoterRouter.delete("/:id", deletePromoter);
+PromoterRoutes.get('/', getAllPromoters);
+PromoterRoutes.post('/', createPromoter);
+PromoterRoutes.get('/:id', getPromoterById);
+PromoterRoutes.put('/:id', updatePromoter);
+PromoterRoutes.delete('/:id', deletePromoter);
 
-export default PromoterRouter
+export default PromoterRoutes;

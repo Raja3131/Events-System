@@ -1,52 +1,26 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const promoterSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
-      },
-      gst: {
+    },
+    email: {
         type: String,
-        required: true,
-      },
-      aadhar: {
+    },
+    phone: {
         type: String,
-        required: true,
-      },
-      pan: {
+    },
+    address: {
         type: String,
-        required: true,
-      },
-      country: {
+    },
+    aadhar: {
         type: String,
-        required: true,
-      },
-      district: {
+    },
+    photo: {
         type: String,
-        required: true,
-      },
-      state: {
-        type: String,
-        required: true,
-      },
-      city: {
-        type: String,
-        required: true,
-      },
-      country2: {
-        type: String,
-      },
-      district2: {
-        type: String,
-      },
-      state2: {
-        type: String,
-      },
-      city2: {
-        type: String,
-      }
+    },
 })
 
-const PromoterSchema= mongoose.model('PromoterSchema',promoterSchema);
+const PromoterSchema = mongoose.model('PromoterSchema', promoterSchema)
 
-export default PromoterSchema;
+export default PromoterSchema
