@@ -3,10 +3,10 @@ import cors from "cors";
 import mongoose from "mongoose";
 import EventsRouter from "./src/routes/EventsRoutes.js";
 import ManagerRouter from "./src/routes/ManagerRoutes.js";
-
 import LocationRouter from "./src/routes/LocationRoutes.js";
 import PromoterRouter from "./src/routes/PromoterRoutes.js";
-
+import EventRegisterRouter from "./src/routes/EventRegisterRouter.js";
+import ShopDetailsRouter from "./src/routes/ShopDetailRoutes.js";
 const app = express();
 
 app.use(express.json({ limit: "30mb", extended: true }));
@@ -30,4 +30,6 @@ app.use("/managers", ManagerRouter);
 
 app.use("/locations", LocationRouter);
 app.use("/promoters", PromoterRouter);
+app.use("/eventRegister", EventRegisterRouter);
+app.use("/shop", ShopDetailsRouter);
 

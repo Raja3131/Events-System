@@ -8,6 +8,7 @@ import Client from "./Main/Client/client";
 import Eventmanager from '../Body/Main/Manager/ManagerForm/ManagerForm'
 import Location from '../../Components/location1'
 import PromoterRegisteration from "./Main/PromoterRegisteration";
+import ClientDetails from './Main/ShopDetails/ShopDetails'
 
 const HocEvent=Border(Event)
 const HocClient=Border(Client)
@@ -18,8 +19,8 @@ export default function Body(){
     let state=useSelector((state)=>state.Tittle.name)
     
     return(
-        <div style={{display:'flex',height:'100%',width:'100%'}}>
-            <div style={{height:'100%',width:'20%',backgroundColor:'#e4e8ef',position:'sticky',top:'50%'}}>
+        <div style={{display:'flex',height:'100%',width:'100%',overflow:'scroll'}} >
+            <div style={{height:'100%',width:'20%',backgroundColor:'#e4e8ef',position:'sticky',marginTop:0}}>
                 <Nav/>
             </div>
             <div style={{height:'100%',width:'80%',padding:'2%'}}>
@@ -29,6 +30,7 @@ export default function Body(){
                     <Route exact path='/promoter' element={<PromoterRegisteration />}/>
                     <Route  path='/client' element={<HocClient/>}/>
                     <Route  path='/manager' element={<Eventmanager/>}/>
+                    <Route path='/shop' element={<ClientDetails/>}/>
                 </Routes>
             </div>
         </div>

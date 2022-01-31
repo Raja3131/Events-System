@@ -14,7 +14,8 @@ export default function Nav() {
                  { title: 'Client Details', path: 'client' },
                  { title: 'Promoter Details', path: 'promoter' },
                  { title: 'Registration Details', path: 'client'},
-                { title: 'Manager Details', path: 'manager'},
+                { title: 'Organization Details', path: 'manager'},
+                {title:'Shop Details',path:'shop'},
                 ];
 
     const route=(item)=>{

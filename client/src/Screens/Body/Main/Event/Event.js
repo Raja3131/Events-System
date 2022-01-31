@@ -14,8 +14,6 @@ import DatePicker from "../../../../Components/DatePicker";
 import Buttons from "../../../../Components/button.js";
 import Location from "../../../../Components/Location";
 import { getData,putData,deleteData,postData} from '../../../../Redux/Action/EventAction/Action'
-import Auto from "../../../../Components/Autocomplete";
-import axios from "axios";
 
 export default function Event() {
 
@@ -149,7 +147,7 @@ let [initialval,setInitialval]=useState(initial)
     if(curdate.getDate()<=start.getDate() && start.getDate() <= end.getDate()){
           for(let x in val){
             
-                if(x=='_id'&&action!=='delete'){
+                if(x==='_id'&&action!=='delete'){
                     console.log('val',val,'values',values)
                     dispatch(putData(val))
                     setStartDate(null)
@@ -160,7 +158,7 @@ let [initialval,setInitialval]=useState(initial)
                     setLoad(!load)
                 }
             }
-            if(count==1){
+            if(count===1){
                 dispatch(postData(val))
                  setStartDate(null)
                  setEndDate(null)  
@@ -168,7 +166,7 @@ let [initialval,setInitialval]=useState(initial)
                 formikHelpers.resetForm();
             }
             }else{
-                setError('date is pasted so select apresent or future date')
+                setError('date is pasted so select a present or future date')
             }
        
     }

@@ -21,10 +21,7 @@ const mangerSchema = new mongoose.Schema({
         required: true
 
     },
-    address2: {
-        type: String,
-        required: true
-    },
+  
     email: {
         type: String,
         required: true,
@@ -38,11 +35,7 @@ const mangerSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    website: {
-        type: String,
-        required: true
-        
-    }
+ 
 })
 
 const ManagerSchema = mongoose.model('ManagerSchema', mangerSchema);

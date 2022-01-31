@@ -116,7 +116,7 @@ let dispatch=useDispatch()
 
         let count=1;
         for(let x in val){
-            if(x=='_id'){
+            if(x==='_id'){
                 console.log('update')
                 dispatch(putData(values))
                 setInitialval(initial)
@@ -124,7 +124,7 @@ let dispatch=useDispatch()
                 count+=1;
             }
         }
-        if(count==1){
+        if(count===1){
             console.log('post')
             dispatch(postData(val))
             formikHelpers.resetForm();

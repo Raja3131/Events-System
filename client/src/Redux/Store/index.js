@@ -8,7 +8,7 @@ export function configureStore() {
   let store = compose(
     applyMiddleware(sagaMiddle)
     
-  )(createStore)(reducer);
+  )(createStore)(reducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
   sagaMiddle.run(RootSaga);
   return store;

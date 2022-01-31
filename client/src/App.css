@@ -1,3 +1,6 @@
 .ag-grid-header{
     background-color: rgb(228, 232, 239);
 }
+html {
+    scroll-behaviour: smooth;
+    }

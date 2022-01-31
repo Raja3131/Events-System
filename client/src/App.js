@@ -1,6 +1,7 @@
 import Header from "./Screens/Header";
 import Body from "./Screens/Body";
 import { BrowserRouter as Router} from "react-router-dom";
+import './App.css';
 
 function App() {
   return (
